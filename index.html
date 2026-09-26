@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'chaim | The Complete Holistic Human Hub</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cream: #F1E8D6;
+            --sage-primary: #C8912A;
+            --sage-dark: #2F1C25;
+            --terracotta-accent: #6B7B5E;
+            --terracotta-light: #DCE2D2;
+            --gold-spiritual: #C8912A;
+            --gold-light: #F8F2E4;
+            --text-dark: #2A2118;
+            --text-light: rgba(42, 33, 24, 0.65);
+            --white: #F8F2E4;
+            --shadow-soft: 0 10px 30px rgba(44, 62, 53, 0.05);
+            --radius-card: 2px;
+            --font-heading: 'Newsreader', serif;
+            --font-body: 'Work Sans', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: var(--font-heading);
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+
+        .hero h1, .section-header h2, .hub-overview h2, .life-card-quote {
+            font-style: italic;
+        }
+
+        .meal-title, .hub-card h3, .spiritual-card h3, .logo-text {
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: 2px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--sage-primary);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--sage-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-terracotta {
+            background-color: var(--terracotta-accent);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-terracotta:hover {
+            background-color: #56634c;
+            transform: translateY(-2px);
+        }
+
+        .btn-gold {
+            background-color: var(--gold-spiritual);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-gold:hover {
+            background-color: #a97a1f;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--sage-dark);
+            border: 1px solid var(--sage-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(74, 107, 93, 0.08);
+            transform: translateY(-2px);
+        }
+
+        /* Nav */
+        nav {
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            background-color: var(--sage-dark);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--bg-cream);
+        }
+
+        .logo-mark {
+            width: 36px;
+            height: 36px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(241, 232, 214, 0.7);
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--sage-primary);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 70px 0 90px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            color: var(--gold-spiritual);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--sage-dark);
+            max-width: 850px;
+            margin: 0 auto 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 680px;
+            margin: 0 auto 36px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .voice-toggle {
+            position: absolute; top: 8px; right: 24px; z-index: 5;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(44,62,53,0.06); border: 1px solid rgba(44,62,53,0.15);
+            color: var(--sage-dark); font-size: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+
+        .narration-status {
+            margin-top: 18px; font-size: 0.78rem; color: var(--text-light);
+        }
+
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--sage-dark);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--sage-primary);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        /* Phase 1: Meals */
+        .meals-section {
+            padding: 70px 0;
+            background-color: var(--white);
+            border-radius: var(--radius-card);
+            margin-bottom: 90px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .meal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            padding: 0 32px;
+        }
+
+        .meal-card {
+            background-color: var(--bg-cream);
+            border-radius: 2px;
+            overflow: hidden;
+            border: 1px solid rgba(74, 107, 93, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .meal-card:hover { transform: translateY(-4px); }
+
+        .meal-img {
+            width: 100%;
+            height: 180px;
+            background-color: var(--sage-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 0 16px;
+        }
+
+        .meal-content { padding: 24px; }
+        .meal-title { font-size: 1.25rem; color: var(--sage-dark); margin-bottom: 8px; }
+        .meal-desc { font-size: 0.95rem; color: var(--text-light); margin-bottom: 20px; }
+        .meal-footer { display: flex; justify-content: space-between; align-items: center; }
+        .meal-price { font-weight: 700; font-size: 1.1rem; color: var(--terracotta-accent); }
+
+        /* Phase 2: Mind & Social Hub */
+        .phase-section { padding: 80px 0; margin-bottom: 90px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 40px; }
+
+        .hub-card {
+            background: var(--white);
+            border-radius: var(--radius-card);
+            padding: 36px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(74, 107, 93, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hub-card-tag {
+            color: var(--terracotta-accent);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .card-num {
+            font-family: var(--font-heading);
+            font-style: italic;
+            color: var(--terracotta-accent);
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        .hub-card h3 { font-size: 1.5rem; color: var(--sage-dark); margin-bottom: 12px; }
+        .hub-card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 24px; }
+
+        .select-box {
+            background-color: var(--terracotta-light);
+            border-radius: 2px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .select-box label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--sage-dark); margin-bottom: 8px; }
+        .select-box select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 2px;
+            border: 1px solid rgba(74, 107, 93, 0.2);
+            background-color: var(--white);
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        /* PHASE 3: SPIRITUAL PILLAR */
+        .phase3-bg {
+            background-color: var(--gold-light);
+            border-radius: var(--radius-card);
+            padding: 80px 32px;
+            margin-bottom: 90px;
+            border: 1px solid rgba(212, 163, 89, 0.3);
+        }
+
+        .spiritual-card {
+            background: var(--white);
+            border-radius: 2px;
+            padding: 32px;
+            border-top: 4px solid var(--gold-spiritual);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .devotional-reveal {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed rgba(74, 107, 93, 0.25);
+            font-size: 0.9rem;
+            font-style: italic;
+            color: var(--sage-dark);
+            display: none;
+        }
+        .devotional-reveal.show { display: block; }
+
+        /* PHASE 4: THE ONE-STOP HUB & ENTERPRISE */
+        .hub-overview {
+            background: var(--sage-dark);
+            color: var(--white);
+            border-radius: var(--radius-card);
+            padding: 70px 40px;
+            margin-bottom: 90px;
+        }
+
+        .hub-overview h2 { color: var(--bg-cream); }
+        .hub-overview p { color: rgba(255, 255, 255, 0.8); }
+
+        .assessment-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            padding: 32px;
+            margin-top: 36px;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .plan-result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+            text-align: left;
+        }
+        .plan-item {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 4px;
+            padding: 18px;
+        }
+        .plan-item strong {
+            display: block;
+            color: var(--sage-primary);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            letter-spacing: 0.02em;
+        }
+        .plan-item p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+        }
+
+        .dimension-checkbox {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 16px;
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .dimension-checkbox input { accent-color: var(--terracotta-accent); width: 18px; height: 18px; }
+
+        /* Life Card Widget */
+        .life-card-section {
+            background: linear-gradient(135deg, var(--sage-dark), var(--sage-primary));
+            border-radius: var(--radius-card);
+            padding: 60px 40px;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 90px;
+        }
+
+        .life-card-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            max-width: 620px;
+            margin: 30px auto 0;
+            padding: 32px;
+        }
+
+        .life-card-quote { font-family: var(--font-heading); font-size: 1.35rem; line-height: 1.5; margin-bottom: 16px; color: var(--bg-cream); }
+        .life-card-author { font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terracotta-accent); }
+
+        footer { border-top: 1px solid rgba(74, 107, 93, 0.1); padding: 40px 0; text-align: center; color: var(--text-light); font-size: 0.9rem; }
+
+        /* Floating cart */
+        .cart-float {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            background: var(--sage-dark);
+            color: var(--white);
+            border-radius: 2px;
+            padding: 18px 22px;
+            box-shadow: 0 12px 30px rgba(44,62,53,0.3);
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            z-index: 200;
+            transform: translateY(140px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .cart-float.show { transform: translateY(0); opacity: 1; }
+        .cart-float .cart-summary { font-size: 0.9rem; }
+        .cart-float .btn { padding: 10px 20px; font-size: 0.85rem; }
+
+        .status-note {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .hero-ctas { flex-direction: column; }
+            .cart-float { left: 16px; right: 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#" class="logo-area">
+                <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#F1E8D6" stroke-width="4"/>
+                    <path d="M50 25 C40 40 35 55 50 75 C65 55 60 40 50 25 Z" fill="#F1E8D6"/>
+                    <path d="M50 40 C45 50 43 60 50 70 C57 60 55 50 50 40 Z" fill="#C8912A"/>
+                </svg>
+                <span class="logo-text brand-font">L'chaim</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#meals">Fresh Foods</a></li>
+                <li><a href="#mind-social">Mind & Social</a></li>
+                <li><a href="#spirit">Spiritual Alignment</a></li>
+                <li><a href="#one-stop-hub">Complete Hub</a></li>
+            </ul>
+            <a href="#one-stop-hub" class="btn btn-primary">Start Concierge Plan</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- Hero Section -->
+        <section class="hero" style="position:relative;">
+            <button class="voice-toggle" id="voiceToggle" aria-label="Mute narration" title="Mute narration">🔊</button>
+            <span class="hero-badge" id="heroEyebrow">A Toast to Full Living</span>
+            <h1 id="heroHeadline">Nourishing Body, Mind, Social & Spirit</h1>
+            <p id="heroSub">L'chaim is your complete one-stop hub for human flourishing—combining healthy fresh foods with integrated solutions for physical, mental, social, and spiritual well-being.</p>
+            <div class="hero-ctas">
+                <a href="#meals" class="btn btn-primary">Order Fresh Meals</a>
+                <a href="#spirit" class="btn btn-gold">Spiritual Alignment</a>
+                <a href="#one-stop-hub" class="btn btn-terracotta">Full Life Assessment</a>
+            </div>
+            <p class="narration-status" id="narrationStatus">Tap anywhere to hear the welcome message</p>
+        </section>
+
+        <!-- Phase 1: Fresh Foods -->
+        <section id="meals" class="meals-section">
+            <div class="section-header">
+                <span class="section-tag">Phase 1 • Body</span>
+                <h2>L'chaim Fresh Daily</h2>
+                <p>Nutrient-dense, wholesome meals prepared fresh to revitalize your body from the inside out.</p>
+            </div>
+
+            <div class="meal-grid" id="mealGrid"></div>
+        </section>
+
+        <!-- Phase 2: Mind & Social Hub -->
+        <section id="mind-social" class="phase-section">
+            <div class="section-header">
+                <span class="section-tag">Phase 2 • Mind & Social</span>
+                <h2>Mind & Social Health</h2>
+                <p>Building cognitive clarity, emotional resilience, and deep relational connections.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="hub-card">
+                    <div>
+                        <div class="hub-card-tag"><span class="card-num">01</span>Mental Health</div>
+                        <h3>Clarity & Stress Coaching</h3>
+                        <p>Guided 1-on-1 sessions focused on stress management, emotional balance, and cognitive clarity.</p>
+                        <div class="select-box">
+                            <label for="focus-area">Select Your Focus:</label>
+                            <select id="focus-area">
+                                <option>Workplace Burnout</option>
+                                <option>Emotional Alignment</option>
+                                <option>Focus & Productivity</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" id="bookCoachBtn" style="width:100%;">Book Session</button>
+                        <p class="status-note" id="coachStatus"></p>
+                    </div>
+                </div>
+
+                <div class="hub-card">
+                    <div>
+                        <div class="hub-card-tag"><span class="card-num">02</span>Social Connection</div>
+                        <h3>L'chaim Table Circles</h3>
+                        <p>Facilitated small group gatherings centered around healthy meals and meaningful conversations.</p>
+                        <div class="select-box">
+                            <label>Next Circle:</label>
+                            <p id="circleTopic" style="font-weight: 600; color: var(--sage-dark);">"Healthy Boundaries & Relationships"</p>
+                            <p id="circleTime" style="font-size: 0.85rem; color: var(--text-light);">This Thursday @ 6:30 PM</p>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-terracotta" id="rsvpCircleBtn" style="width:100%;">RSVP For Circle</button>
+                        <p class="status-note" id="circleStatus"></p>
+                    </div>
+                </div>
+
+                <div class="hub-card">
+                    <div>
+                        <div class="hub-card-tag"><span class="card-num">03</span>Daily Practice</div>
+                        <h3>Audio Reflection Vault</h3>
+                        <p>3-minute daily audio reflections for mental grounding, focus, and emotional reset.</p>
+                        <div style="background: rgba(0,0,0,0.05); padding: 12px; border-radius: 20px; text-align: center; margin-bottom: 20px;">
+                            <span style="font-size: 0.9rem; font-weight: 600;">▶ Listen: "Quiet Confidence" (2:30)</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" style="width:100%;" onclick="document.getElementById('daily-card').scrollIntoView({behavior:'smooth'})">Access Library</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: SPIRITUAL PILLAR INTEGRATION -->
+        <section id="spirit" class="phase3-bg">
+            <div class="section-header">
+                <span class="section-tag" style="background-color: var(--gold-spiritual);">Phase 3 • Spirit</span>
+                <h2>The Spiritual Dimension of Man</h2>
+                <p>Cultivating inner peace, transcendent purpose, and living in alignment with core values and faith.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="spiritual-card">
+                    <h3 class="brand-font" style="color: var(--sage-dark); margin-bottom: 12px;"><span class="card-num">01</span>Purpose & Values Mentorship</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px;">Align your daily life, career, and personal decisions with deep-seated spiritual principles and higher purpose.</p>
+                    <button class="btn btn-gold" id="mentorshipBtn" style="width: 100%;">Explore Mentorship</button>
+                    <p class="status-note" id="mentorshipStatus"></p>
+                </div>
+
+                <div class="spiritual-card">
+                    <h3 class="brand-font" style="color: var(--sage-dark); margin-bottom: 12px;"><span class="card-num">02</span>Daily Quiet Time & Meditations</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px;">Curated spiritual devotionals, scripture reflections, and quiet contemplation guides delivered daily.</p>
+                    <button class="btn btn-secondary" id="devotionalBtn" style="width: 100%;">View Today's Devotional</button>
+                    <p class="devotional-reveal" id="devotionalText"></p>
+                </div>
+
+                <div class="spiritual-card">
+                    <h3 class="brand-font" style="color: var(--sage-dark); margin-bottom: 12px;"><span class="card-num">03</span>Restoration Retreats</h3>
+                    <p style="color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px;">Immersive day-retreats combining silence, healthy meals, spiritual alignment, and soul refreshment.</p>
+                    <button class="btn btn-gold" id="retreatBtn" style="width: 100%;">Join Waitlist</button>
+                    <p class="status-note" id="retreatStatus"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 4: COMPLETE ONE-STOP HUB & ENTERPRISE INTEGRATION -->
+        <section id="one-stop-hub" class="hub-overview">
+            <div class="section-header">
+                <span class="hero-badge" style="background: rgba(255,255,255,0.15); color: var(--gold-spiritual);">Phase 4 • The Complete One-Stop Hub</span>
+                <h2>Your Personalized Life Restoration Concierge</h2>
+                <p>Bring every aspect of WHO health and spiritual alignment together into a single, unified action plan.</p>
+            </div>
+
+            <div class="assessment-container">
+                <h3 class="brand-font" style="text-align: center; margin-bottom: 12px;">Step 1: Select the Dimensions You Want to Restore</h3>
+                <p style="text-align: center; font-size: 0.95rem;">Our holistic algorithm will generate your custom daily meal plan, mental coaching track, and spiritual reflection sequence.</p>
+
+                <div class="assessment-grid">
+                    <label class="dimension-checkbox">
+                        <input type="checkbox" value="Physical" checked>
+                        <span>Physical (Daily Meal Plan)</span>
+                    </label>
+                    <label class="dimension-checkbox">
+                        <input type="checkbox" value="Mental" checked>
+                        <span>Mental (Stress & Clarity)</span>
+                    </label>
+                    <label class="dimension-checkbox">
+                        <input type="checkbox" value="Social" checked>
+                        <span>Social (Community Circles)</span>
+                    </label>
+                    <label class="dimension-checkbox">
+                        <input type="checkbox" value="Spiritual" checked>
+                        <span>Spiritual (Purpose & Peace)</span>
+                    </label>
+                </div>
+
+                <div style="text-align: center; margin-top: 28px;">
+                    <button class="btn btn-terracotta" style="padding: 16px 36px; font-size: 1.05rem;" id="generatePlanBtn">Generate My L'chaim Plan</button>
+                    <p class="status-note" id="planStatus" style="color: rgba(255,255,255,0.65);"></p>
+                    <div id="planResult" class="plan-result"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Digital L'chaim Life Card Widget -->
+        <section id="daily-card" class="life-card-section">
+            <h2 class="brand-font">Digital L'chaim Life Card</h2>
+            <p>A daily toast to life—nourishing every layer of your existence.</p>
+
+            <div class="life-card-box">
+                <p class="life-card-quote" id="lifeCardQuote">"To live fully is to honor the body with good food, the mind with peace, the heart with connection, and the spirit with purpose."</p>
+                <p class="life-card-author" id="lifeCardAuthor">Today's Total Reflection • L'chaim 18</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Floating cart -->
+    <div class="cart-float" id="cartFloat">
+        <span class="cart-summary" id="cartSummary">0 items · $0</span>
+        <button class="btn btn-terracotta" id="checkoutBtn">Checkout</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 L'chaim Hub. All rights reserved. To Life. To Wholeness.</p>
+    </footer>
+
+<script>
+  // ==== BACKEND CONFIG ====
+  // Paste your Apps Script Web App deployment URL here (see SETUP.md).
+  // Leave blank to run on local demo data only.
+  const WEBAPP_URL = '';
+
+  async function apiGet(action) {
+    if (!WEBAPP_URL) return null;
+    try {
+      const res = await fetch(`${WEBAPP_URL}?action=${action}`);
+      const data = await res.json();
+      return data.ok ? data.items : null;
+    } catch (err) {
+      console.warn('API GET failed, using local data:', err);
+      return null;
+    }
+  }
+
+  async function apiPost(action, payload) {
+    if (!WEBAPP_URL) return { ok: false, error: 'No backend configured (demo mode)' };
+    try {
+      const res = await fetch(WEBAPP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight on Apps Script
+        body: JSON.stringify({ action, ...payload })
+      });
+      return await res.json();
+    } catch (err) {
+      return { ok: false, error: err.message };
+    }
+  }
+
+  // ---- Landing narration (auto-plays on load, soothing female voice) ----
+  let narrationEnabled = true;
+
+  function pickSoothingFemaleVoice(voices) {
+    const preferredNames = [
+      'samantha', 'victoria', 'moira', 'tessa', 'fiona', 'karen', 'susan',
+      'zira', 'aria', 'jenny', 'google us english', 'google uk english female',
+      'female'
+    ];
+    let match = voices.find(v => preferredNames.some(n => v.name.toLowerCase().includes(n)));
+    if (!match) match = voices.find(v => v.lang && v.lang.startsWith('en') && /female/i.test(v.name));
+    if (!match) match = voices.find(v => v.lang && v.lang.startsWith('en'));
+    return match || voices[0] || null;
+  }
+
+  function buildNarrationText() {
+    const eyebrow = document.getElementById('heroEyebrow')?.textContent || '';
+    const headline = document.getElementById('heroHeadline')?.textContent || '';
+    const sub = document.getElementById('heroSub')?.textContent || '';
+    return `${eyebrow}. ${headline}. ${sub}`;
+  }
+
+  function speakLanding() {
+    const statusEl = document.getElementById('narrationStatus');
+    if (!('speechSynthesis' in window)) {
+      if (statusEl) statusEl.textContent = 'Voice narration isn\'t supported in this browser.';
+      return;
+    }
+    if (!narrationEnabled) return;
+    window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(buildNarrationText());
+    utter.rate = 0.92;
+    utter.pitch = 1.05;
+    utter.volume = 1;
+    utter.onerror = (e) => {
+      if (statusEl) {
+        statusEl.textContent = e.error === 'not-allowed'
+          ? 'Tap the 🔊 icon above to start narration (phones/browsers block audio until you tap).'
+          : `Narration error: ${e.error}`;
+      }
+    };
+    utter.onstart = () => { if (statusEl) statusEl.textContent = `Playing: ${utter.voice ? utter.voice.name : 'default voice'}`; };
+    utter.onend = () => { if (statusEl) statusEl.textContent = ''; };
+
+    const trySpeak = () => {
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length === 0) {
+        if (statusEl) statusEl.textContent = 'No voices found — check your device\'s Text-to-Speech settings.';
+      } else {
+        utter.voice = pickSoothingFemaleVoice(voices);
+      }
+      window.speechSynthesis.speak(utter);
+    };
+
+    const existing = window.speechSynthesis.getVoices();
+    if (existing.length) {
+      trySpeak();
+    } else {
+      let fired = false;
+      window.speechSynthesis.onvoiceschanged = () => { fired = true; trySpeak(); };
+      setTimeout(() => { if (!fired) trySpeak(); }, 600);
+    }
+  }
+
+  const voiceToggle = document.getElementById('voiceToggle');
+  voiceToggle.addEventListener('click', () => {
+    narrationEnabled = !narrationEnabled;
+    if (narrationEnabled) {
+      voiceToggle.textContent = '🔊';
+      voiceToggle.setAttribute('aria-label', 'Mute narration');
+      speakLanding();
+    } else {
+      voiceToggle.textContent = '🔇';
+      voiceToggle.setAttribute('aria-label', 'Play narration');
+      window.speechSynthesis.cancel();
+    }
+  });
+
+  window.addEventListener('load', () => {
+    speakLanding();
+    document.body.addEventListener('click', function primeNarration() {
+      if (window.speechSynthesis.paused || !window.speechSynthesis.speaking) speakLanding();
+      document.body.removeEventListener('click', primeNarration);
+    }, { once: true });
+  });
+
+  function collectContact(promptForPhone = true) {
+    const name = prompt('Your name:');
+    if (!name) return null;
+    let phone = '';
+    if (promptForPhone) {
+      phone = prompt('Phone number:');
+      if (!phone) return null;
+    }
+    const email = prompt('Email (optional — leave blank to skip):') || '';
+    return { name, phone, email };
+  }
+
+  // ---------- Phase 1: Meals + cart + checkout ----------
+  const localMeals = [
+    { name: 'Vitality Grain & Greens Bowl', tag: 'Vitality Grain Bowl', desc: 'Quinoa, slow-roasted root vegetables, organic kale, and pumpkin seed dressing.', price: 14.50 },
+    { name: 'Herb-Crusted Wild Salmon', tag: 'Nourish Herb Salmon', desc: 'Grilled wild salmon with steamed asparagus, sweet potato puree, and lemon drizzle.', price: 18.00 },
+    { name: 'Restoration Superfood Salad', tag: 'Restoration Superfood Salad', desc: 'Baby spinach, fresh berries, roasted walnuts, avocado, and citrus vinaigrette.', price: 12.50 },
+  ];
+
+  const cart = [];
+  let cartTotal = 0;
+  const cartFloat = document.getElementById('cartFloat');
+  const cartSummary = document.getElementById('cartSummary');
+
+  function updateCartUI() {
+    if (cart.length === 0) { cartFloat.classList.remove('show'); return; }
+    cartSummary.textContent = `${cart.length} item${cart.length > 1 ? 's' : ''} · $${cartTotal.toFixed(2)}`;
+    cartFloat.classList.add('show');
+  }
+
+  async function loadMeals() {
+    const remote = await apiGet('getmenu');
+    const meals = remote && remote.length
+      ? remote.map(r => ({ name: r.Name, tag: r.Tag || r.Name, desc: r.Description, price: Number(r.Price) }))
+      : localMeals;
+
+    const grid = document.getElementById('mealGrid');
+    meals.forEach(m => {
+      const card = document.createElement('div');
+      card.className = 'meal-card';
+      card.innerHTML = `
+        <div class="meal-img">${m.tag}</div>
+        <div class="meal-content">
+          <h3 class="meal-title">${m.name}</h3>
+          <p class="meal-desc">${m.desc}</p>
+          <div class="meal-footer">
+            <span class="meal-price">$${m.price.toFixed(2)}</span>
+            <button class="btn btn-secondary" style="padding: 8px 16px;" data-name="${m.name}" data-price="${m.price}">Add</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+
+    grid.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') return;
+      const name = e.target.dataset.name;
+      const price = parseFloat(e.target.dataset.price);
+      cart.push({ name, price });
+      cartTotal += price;
+      const original = e.target.textContent;
+      e.target.textContent = 'Added ✓';
+      setTimeout(() => { e.target.textContent = original; }, 900);
+      updateCartUI();
+    });
+  }
+
+  document.getElementById('checkoutBtn').addEventListener('click', async () => {
+    if (!cart.length) return;
+    const contact = collectContact(true);
+    if (!contact) return;
+    const result = await apiPost('placeorder', { ...contact, items: cart, total: cartTotal });
+    if (result.ok) {
+      alert(`Thanks, ${contact.name}! Order ${result.orderId} received.`);
+      cart.length = 0; cartTotal = 0;
+      updateCartUI();
+    } else {
+      alert('Demo mode: no backend connected, so this order was not saved. (' + result.error + ')');
+    }
+  });
+
+  // ---------- Phase 2/3: coaching, circle RSVP, mentorship, retreat ----------
+  async function submitRequest(statusElId, pillar, message) {
+    const statusEl = document.getElementById(statusElId);
+    const contact = collectContact(false);
+    if (!contact) return;
+    if (statusEl) statusEl.textContent = 'Sending…';
+    const result = await apiPost('bookcoaching', { name: contact.name, email: contact.email, pillar, message });
+    if (statusEl) {
+      statusEl.textContent = result.ok
+        ? `Request received (${result.bookingId}) — we'll follow up by email.`
+        : 'Demo mode: not saved (' + result.error + ')';
+    }
+  }
+
+  document.getElementById('bookCoachBtn').addEventListener('click', () => {
+    const focus = document.getElementById('focus-area').value;
+    submitRequest('coachStatus', 'Mind — Clarity & Stress Coaching', `Focus area: ${focus}`);
+  });
+
+  document.getElementById('rsvpCircleBtn').addEventListener('click', () => {
+    const topic = document.getElementById('circleTopic').textContent;
+    const time = document.getElementById('circleTime').textContent;
+    submitRequest('circleStatus', 'Social — Table Circle RSVP', `${topic} — ${time}`);
+  });
+
+  document.getElementById('mentorshipBtn').addEventListener('click', () => {
+    submitRequest('mentorshipStatus', 'Spirit — Purpose & Values Mentorship', '');
+  });
+
+  document.getElementById('retreatBtn').addEventListener('click', () => {
+    submitRequest('retreatStatus', 'Spirit — Restoration Retreat Waitlist', '');
+  });
+
+  // ---------- Devotional reveal (pulls from Reflections sheet) ----------
+  let reflectionsCache = null;
+  document.getElementById('devotionalBtn').addEventListener('click', async () => {
+    const el = document.getElementById('devotionalText');
+    if (!reflectionsCache) {
+      const remote = await apiGet('getreflections');
+      reflectionsCache = (remote && remote.length) ? remote.map(r => r.Quote) : [
+        "Gratitude is a practice, not a feeling — begin the meal by naming one good thing.",
+        "The table is the oldest classroom. Sit a little longer today."
+      ];
+    }
+    el.textContent = reflectionsCache[Math.floor(Math.random() * reflectionsCache.length)];
+    el.classList.add('show');
+  });
+
+  // ---------- Phase 4: concierge plan assessment ----------
+  function renderPlan(plan) {
+    const resultEl = document.getElementById('planResult');
+    const order = ['physical', 'mental', 'social', 'spiritual'];
+    resultEl.innerHTML = order
+      .filter(k => plan && plan[k])
+      .map(k => `<div class="plan-item"><strong>${plan[k].title}</strong><p>${plan[k].detail}</p></div>`)
+      .join('');
+  }
+
+  // Mirrors generatePlanContent_() in code.gs, for a live preview when no
+  // backend is connected yet. Nothing here is saved or emailed.
+  function generateLocalPlanFallback(dimensions) {
+    const dims = dimensions.map(d => d.toLowerCase());
+    const plan = {};
+    if (dims.includes('physical')) {
+      plan.physical = {
+        title: 'Physical — Your starter meal plan',
+        detail: 'Your first three meals: ' + localMeals.slice(0, 3).map(m => m.name).join(', ') + '.'
+      };
+    }
+    if (dims.includes('mental')) {
+      plan.mental = {
+        title: 'Mental — Clarity & Stress Coaching',
+        detail: "You're enrolled. We'll reach out within 1-2 days to schedule your first session."
+      };
+    }
+    if (dims.includes('social')) {
+      plan.social = {
+        title: "Social — L'chaim Table Circles",
+        detail: "You're on the list for the next Table Circle — watch your email for the date and topic."
+      };
+    }
+    if (dims.includes('spiritual')) {
+      const list = reflectionsCache || ['Take a quiet moment today to reflect on what matters most.'];
+      plan.spiritual = {
+        title: "Spiritual — Today's devotional",
+        detail: list[Math.floor(Math.random() * list.length)]
+      };
+    }
+    return plan;
+  }
+
+  document.getElementById('generatePlanBtn').addEventListener('click', async () => {
+    const statusEl = document.getElementById('planStatus');
+    const dimensions = Array.from(document.querySelectorAll('.dimension-checkbox input:checked')).map(cb => cb.value);
+    if (!dimensions.length) { statusEl.textContent = 'Select at least one dimension.'; return; }
+    const contact = collectContact(true);
+    if (!contact) return;
+    statusEl.textContent = 'Generating your plan…';
+    document.getElementById('planResult').innerHTML = '';
+
+    const result = await apiPost('requestconcierge', { ...contact, dimensions });
+
+    if (result.ok) {
+      statusEl.textContent = contact.email
+        ? `Plan ready (${result.requestId}) — also emailed to ${contact.email}.`
+        : `Plan ready (${result.requestId}).`;
+      renderPlan(result.plan);
+    } else if (result.error && result.error.includes('demo mode')) {
+      statusEl.textContent = 'Demo preview — no backend connected, so nothing was saved or emailed:';
+      renderPlan(generateLocalPlanFallback(dimensions));
+    } else {
+      statusEl.textContent = 'Error: ' + result.error;
+    }
+  });
+
+  // ---------- Life Card daily quote ----------
+  async function loadLifeCardQuote() {
+    const remote = await apiGet('getreflections');
+    if (remote && remote.length) {
+      const pick = remote[Math.floor(Math.random() * remote.length)];
+      document.getElementById('lifeCardQuote').textContent = `"${pick.Quote}"`;
+    }
+  }
+
+  loadMeals();
+  loadLifeCardQuote();
+</script>
+
+</body>
+</html>
