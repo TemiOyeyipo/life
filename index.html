@@ -281,6 +281,9 @@
             width: 100%;
             height: 180px;
             background-color: var(--sage-dark);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -618,7 +621,8 @@
         <!-- PHASE 3: SPIRITUAL PILLAR INTEGRATION -->
         <section id="spirit" class="phase3-bg">
             <div class="section-header">
-                <span class="section-tag" style="background-color: var(--gold-spiritual);">Phase 3 • Spirit</span>
+                <!-- Fixed: removed the inline gold background that hid the gold text -->
+                <span class="section-tag">Phase 3 • Spirit</span>
                 <h2>The Spiritual Dimension of Man</h2>
                 <p>Cultivating inner peace, transcendent purpose, and living in alignment with core values and faith.</p>
             </div>
@@ -715,6 +719,12 @@
   // Paste your Apps Script Web App deployment URL here (see SETUP.md).
   // Leave blank to run on local demo data only.
   const WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwiJoBJ7u7fe-wktN_-PHXvkNcbtkDthxL1sRDxBi8qHl8NGIKZgPYAcC0izxkNQgigMA/exec';
+
+  // Escapes text before it goes into an HTML string, so menu names with
+  // quotes or < > characters (e.g. from the Google Sheet) can't break the page.
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
 
   async function apiGet(action) {
     if (!WEBAPP_URL) return null;
@@ -842,10 +852,13 @@
   }
 
   // ---------- Phase 1: Meals + cart + checkout ----------
+  // To use your own photos: put them in an "images" folder next to this file
+  // (or use full URLs) and set the `image` path on each meal below.
+  // Meals loaded from your Google Sheet use the "Image" column instead.
   const localMeals = [
-    { name: 'Vitality Grain & Greens Bowl', tag: 'Vitality Grain Bowl', desc: 'Quinoa, slow-roasted root vegetables, organic kale, and pumpkin seed dressing.', price: 14.50 },
-    { name: 'Herb-Crusted Wild Salmon', tag: 'Nourish Herb Salmon', desc: 'Grilled wild salmon with steamed asparagus, sweet potato puree, and lemon drizzle.', price: 18.00 },
-    { name: 'Restoration Superfood Salad', tag: 'Restoration Superfood Salad', desc: 'Baby spinach, fresh berries, roasted walnuts, avocado, and citrus vinaigrette.', price: 12.50 },
+    { name: 'Vitality Grain & Greens Bowl', tag: 'Vitality Grain Bowl', desc: 'Quinoa, slow-roasted root vegetables, organic kale, and pumpkin seed dressing.', price: 14.50, image: 'images/grain-bowl.jpg' },
+    { name: 'Herb-Crusted Wild Salmon', tag: 'Nourish Herb Salmon', desc: 'Grilled wild salmon with steamed asparagus, sweet potato puree, and lemon drizzle.', price: 18.00, image: 'images/salmon.jpg' },
+    { name: 'Restoration Superfood Salad', tag: 'Restoration Superfood Salad', desc: 'Baby spinach, fresh berries, roasted walnuts, avocado, and citrus vinaigrette.', price: 12.50, image: 'images/salad.jpg' },
   ];
 
   const cart = [];
@@ -862,35 +875,59 @@
   async function loadMeals() {
     const remote = await apiGet('getmenu');
     const meals = remote && remote.length
-      ? remote.map(r => ({ name: r.Name, tag: r.Tag || r.Name, desc: r.Description, price: Number(r.Price) }))
+      ? remote.map(r => ({
+          name: r.Name,
+          tag: r.Tag || r.Name,
+          desc: r.Description,
+          price: Number(r.Price),
+          image: r.Image
+        }))
       : localMeals;
 
     const grid = document.getElementById('mealGrid');
-    meals.forEach(m => {
+    meals.forEach((m, i) => {
       const card = document.createElement('div');
       card.className = 'meal-card';
       card.innerHTML = `
-        <div class="meal-img">${m.tag}</div>
+        <div class="meal-img">${esc(m.tag)}</div>
         <div class="meal-content">
-          <h3 class="meal-title">${m.name}</h3>
-          <p class="meal-desc">${m.desc}</p>
+          <h3 class="meal-title">${esc(m.name)}</h3>
+          <p class="meal-desc">${esc(m.desc)}</p>
           <div class="meal-footer">
-            <span class="meal-price">$${m.price.toFixed(2)}</span>
-            <button class="btn btn-secondary" style="padding: 8px 16px;" data-name="${m.name}" data-price="${m.price}">Add</button>
+            <span class="meal-price">$${(Number(m.price) || 0).toFixed(2)}</span>
+            <button class="btn btn-secondary" style="padding: 8px 16px;" data-index="${i}">Add</button>
           </div>
         </div>`;
       grid.appendChild(card);
+
+      // Show the photo only if it actually loads; otherwise keep the
+      // colored box with the tag text so a bad link never leaves a blank card.
+      const imgUrl = m.image ? String(m.image).trim() : '';
+      if (imgUrl) {
+        const probe = new Image();
+        probe.onload = () => {
+          const box = card.querySelector('.meal-img');
+          box.style.backgroundImage = `url(${JSON.stringify(imgUrl)})`;
+          box.textContent = '';
+          box.setAttribute('role', 'img');
+          box.setAttribute('aria-label', m.name || 'Meal photo');
+        };
+        probe.onerror = () => console.warn('Meal image failed to load:', imgUrl);
+        probe.src = imgUrl;
+      }
     });
 
     grid.addEventListener('click', (e) => {
-      if (e.target.tagName !== 'BUTTON') return;
-      const name = e.target.dataset.name;
-      const price = parseFloat(e.target.dataset.price);
-      cart.push({ name, price });
+      const btn = e.target.closest('button[data-index]');
+      if (!btn) return;
+      const meal = meals[Number(btn.dataset.index)];
+      if (!meal) return;
+      const price = Number(meal.price) || 0;
+      cart.push({ name: meal.name, price });
       cartTotal += price;
-      const original = e.target.textContent;
-      e.target.textContent = 'Added ✓';
-      setTimeout(() => { e.target.textContent = original; }, 900);
+      const original = btn.textContent;
+      btn.textContent = 'Added ✓';
+      setTimeout(() => { btn.textContent = original; }, 900);
       updateCartUI();
     });
   }
@@ -910,16 +947,24 @@
   });
 
   // ---------- Phase 2/3: coaching, circle RSVP, mentorship, retreat ----------
+  // Fixed: now collects a phone number (required) and sends it, so requests
+  // no longer fail when the optional email is left blank.
   async function submitRequest(statusElId, pillar, message) {
     const statusEl = document.getElementById(statusElId);
-    const contact = collectContact(false);
+    const contact = collectContact(true);
     if (!contact) return;
     if (statusEl) statusEl.textContent = 'Sending…';
-    const result = await apiPost('bookcoaching', { name: contact.name, email: contact.email, pillar, message });
+    const result = await apiPost('bookcoaching', {
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      pillar,
+      message
+    });
     if (statusEl) {
       statusEl.textContent = result.ok
-        ? `Request received (${result.bookingId}) — we'll follow up by email.`
-        : 'Demo mode: not saved (' + result.error + ')';
+        ? `Request received (${result.bookingId}) — we'll follow up shortly.`
+        : 'Not saved: ' + result.error;
     }
   }
 
@@ -963,7 +1008,7 @@
     const order = ['physical', 'mental', 'social', 'spiritual'];
     resultEl.innerHTML = order
       .filter(k => plan && plan[k])
-      .map(k => `<div class="plan-item"><strong>${plan[k].title}</strong><p>${plan[k].detail}</p></div>`)
+      .map(k => `<div class="plan-item"><strong>${esc(plan[k].title)}</strong><p>${esc(plan[k].detail)}</p></div>`)
       .join('');
   }
 
